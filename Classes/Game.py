@@ -1,5 +1,6 @@
 import sys, pygame
 from Classes.MainMenu import MainMenu
+from Classes.Button import Button
 
 class Game:
     def __init__(self):
@@ -21,7 +22,7 @@ class Game:
         #pygame.draw.rect(self.screen, (255,255,255), pygame.Rect(30, 30, 60, 60))
 
         #----------------------------------------------
-        self.main_menu = MainMenu()
+        #self.main_menu = MainMenu()
         # ----------------------------------------------
 
     def run(self):
@@ -32,8 +33,7 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.main_menu.display()
-
+            MainMenu().menu2()
             #update screen
             pygame.display.update()
 
