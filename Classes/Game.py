@@ -2,6 +2,8 @@ import sys, pygame
 from Classes.MainMenu import MainMenu
 from Classes.Level import Level
 from Const.ScreenConst import WIDTH,HEIGHT,levels
+from Classes.Button import Button
+
 
 class Game:
     def __init__(self):
@@ -23,11 +25,8 @@ class Game:
         self.main_menu = MainMenu()
         #Level 1
         current_level = 0
-        self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
-        #self.level.draw_background()
-        #self.level.update_player()
+        #self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
 
-        # ----------------------------------------------
 
 
     def run(self):
@@ -45,11 +44,14 @@ class Game:
                 if keys[key]:
                     self.level.update_pos(*move[key])
 
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
-            # update screen
+            self.main_menu.menu_run()
+
+            #update screen
             pygame.display.update()
             self.clock.tick(self.FPS)
