@@ -2,6 +2,7 @@ import sys
 
 import pygame
 from Classes.Button import Button
+from Classes.Sound import Sound
 
 class MainMenu:
     def __init__(self):

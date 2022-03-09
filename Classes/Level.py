@@ -54,6 +54,9 @@ class Level:
 
         if collision:
             return False
+        if collision2:
+            pygame.mixer.music.pause()
+            pygame.mixer.Sound("Son/Trou.wav").play()
 
         self.draw_background()
 

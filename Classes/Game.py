@@ -3,6 +3,7 @@ from Classes.MainMenu import MainMenu
 from Classes.Level import Level
 from Const.ScreenConst import WIDTH,HEIGHT,levels
 from Classes.Button import Button
+from Classes.Sound import Sound
 
 
 class Game:
@@ -26,8 +27,8 @@ class Game:
         #Level 1
         current_level = 0
         #self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
-
-
+        # initiation son arrière-plan
+        self.music = Sound()
 
     def run(self):
         speed = (10, 10)
