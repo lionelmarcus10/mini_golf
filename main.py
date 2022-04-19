@@ -1,5 +1,4 @@
-from Classes.Game import Game
-
+from Classes import Game
 
 game = Game()
 game.run()
