@@ -51,7 +51,7 @@ class Level:
         next_ball_mask = pygame.mask.from_surface(next_ball)
 
         collision = self.border_mask.overlap(next_ball_mask, (0,0))
-
+        collision2 = self.hole_mask.overlap(next_ball_mask, (0, 0))
         if collision:
             return False
         if collision2:
