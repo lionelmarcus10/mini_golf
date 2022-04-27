@@ -26,7 +26,7 @@ class Game:
         self.main_menu = MainMenu()
         #Level 1
         current_level = 0
-        #self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
+        self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
         # initiation son arrière-plan
         self.music = Sound()
 
@@ -51,7 +51,7 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.main_menu.menu_run()
+
 
             #update screen
             pygame.display.update()
