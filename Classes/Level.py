@@ -1,7 +1,8 @@
 import  pygame
 from math import *
-import time
+from Classes.Score import Score
 import numpy as np
+
 # create levels
 
 # integrer le paramètre du boutton
@@ -33,6 +34,9 @@ class Level:
         self.hole_mask = pygame.mask.from_surface(self.hole)
         self.screen = pygame.display.get_surface()
 
+        self.score = 0
+        self.Score = Score()
+
         self.ball = pygame.Surface((self.w, self.h), flags=pygame.SRCALPHA)
         pygame.draw.circle(self.ball, (255, 255, 255), (self.x, self.y), self.ball_size)
         self.ball_mask = pygame.mask.from_surface(self.ball)
@@ -40,12 +44,14 @@ class Level:
         self.screen.blit(self.ball, (0, 0))
         #self.update_player()
 
+    
     # Intègre les images dans la fenetre
     def draw_background(self):
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(self.border, (0, 0))
         self.screen.blit(self.hole, (0, 0))
-        pygame.draw.lines(self.screen, (200, 150, 150), 1, self.hole_mask.outline())
+        self.update_score(self.screen)
+        #pygame.draw.lines(self.screen, (200, 150, 150), 1, self.hole_mask.outline())
 
     def update_pos(self, dx, dy):
         previous_pos = self.x, self.y
@@ -97,6 +103,19 @@ class Level:
                 print(f'pos {i} {(x_final[i] - self.ball_size / 2, y_final[i] - self.ball_size / 2)}')
                 pygame.time.wait(10)
 
+
+            #------------------------------------------------------
+            self.tester_score()
+            if self.besoin_nom:
+                self.Score.ancien_score[-1] = (self.Score.nom, self.Score.nouveau_score)
+                self.Score.trier_score()
+                self.Score.sauvegarder_score()
+
+            for i in range(0, len(self.Score.ancien_score)+1):
+                self.screen.blit(self.Score.afficher_score(i), self.Score.score_corriger)
+            return False, False
+            #------------------------------------------------------
+
             return False
 
 
@@ -119,3 +138,18 @@ class Level:
 
         pygame.display.update()
         return True
+
+    def update_score(self, screen):
+    # afficher le score
+        self.score = round(self.score)
+        font = pygame.font.SysFont("monospace", 16)
+        score_text = font.render(f"Score : {self.score}", True, (255, 0, 0))
+        screen.blit(score_text, (10, 10))
+    
+    def tester_score(self):
+    #permet de vérifier si les scores sont bien à jour
+        self.Score.nouveau_score = self.score
+        self.Score.verif_update()
+        if self.Score.besoin_nom:
+            self.besoin_nom = True
+

@@ -39,7 +39,7 @@ class MainMenu:
         # button start/exit
         self.exit_image = pygame.image.load('Assets/Bouton_exit.png').convert_alpha()
         self.start_image = pygame.image.load('Assets/Bouton_start.png').convert_alpha()
-
+        
 
     def menu2(self):
         self.menu_screen.blit(pygame.transform.scale(self.background2, (int(800), int(600))), (0, 0))
