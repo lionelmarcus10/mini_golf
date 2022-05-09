@@ -27,7 +27,7 @@ class Game:
         self.main_menu = MainMenu()
         #Level 1
         current_level = 0
-        self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
+        #self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
         # initiation son arrière-plan
         self.music = Sound()
 
@@ -54,7 +54,7 @@ class Game:
             pygame.K_DOWN: (0, 1*speed[1])
         }
         # Saisie du pseudo de l'utilisateur
-        self.entrer_nom(self.screen)
+        #self.entrer_nom(self.screen)
         while True:
 
             keys = pygame.key.get_pressed()
@@ -63,11 +63,14 @@ class Game:
                     self.level.score+= 0.5
                     self.level.update_pos(*move[key])
 
+            self.main_menu.menu3()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+            
 
             #update screen
             pygame.display.update()

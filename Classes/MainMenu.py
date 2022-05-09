@@ -21,11 +21,19 @@ class MainMenu:
 
         # IMAGES
 
+        
+
         self.background = pygame.image.load("Assets/Start_menu_back.png")
         self.logo = pygame.image.load("Assets/LOGO.png")
         self.background2 = pygame.image.load("Assets/Background2.jpg")
+        self.background3 = pygame.image.load("Assets/golf_2.png")
         self.solo = pygame.image.load("Assets/Solo.png")
         self.multijoueur = pygame.image.load("Assets/Multijoueur.png")
+        self.Logo1 = pygame.image.load("Assets/LogoLevel1.png")
+        self.Logo2 = pygame.image.load("Assets/LogoLevel2.png")
+        self.Logo3 = pygame.image.load("Assets/LogoLevel3.png")
+        self.Logo4 = pygame.image.load("Assets/LogoLevel4.png")
+        self.Logo5 = pygame.image.load("Assets/LogoLevel5.png")
 
         # FONT
 
@@ -72,10 +80,41 @@ class MainMenu:
             pygame.quit()
             sys.exit()
 
+    def menu3(self):
+        self.menu_screen.blit(pygame.transform.scale(self.background3, (int(800), int(600))), (0, 0))
+        self.exit_button = Button(10, 530, self.exit_image, 1)
+        self.Logo1_button = Button(160, 20, self.Logo1, 0.10)
+        self.Logo2_button = Button(20, 130, self.Logo2, 0.10)
+        self.Logo3_button = Button(160, 240, self.Logo3, 0.10)
+        self.Logo4_button = Button(-5, 330, self.Logo4, 0.10)
+        self.Logo5_button = Button(135, 440, self.Logo5, 0.10)
+
+
+        if self.Logo1_button.draw()==True:
+            print("Niv1")
+
+        if self.Logo2_button.draw()==True:
+            print("Niv2")
+
+        if self.Logo3_button.draw()==True:
+            print("Niv3")
+
+        if self.Logo4_button.draw()==True:
+            print("Niv4")
+
+        if self.Logo5_button.draw()==True:
+            print("Niv5")
+
+        if self.exit_button.draw() == True:
+            self.current_menu-=1
+            self.menu_run()
+
     def menu_run(self):
         if self.current_menu==1:
             self.menu1()
         elif self.current_menu ==2:
             self.menu2()
+        elif self.current_menu == 3:
+            self.menu3()
 
 
