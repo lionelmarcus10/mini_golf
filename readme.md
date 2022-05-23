@@ -10,6 +10,8 @@
 # ressources :
     - Cours pdf de l'Efrei 
     - Github Pour héberger le projet
+    - pygame.org/docs/
+    - https://www.youtube.com/
 
 
 ## Prérequis :
