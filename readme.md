@@ -1,8 +1,12 @@
 # Mini golf A109
 
 
-# Contributeurs : Lionel TOGLAN, Bereket TADIWOS TKELESILLASIE, Romane SEGUI, Komail KASSIMALY, Romain Samson
-
+# Contributeurs : 
+  - Lionel TOGLAN
+  - Bereket TADIWOS TKELESILLASIE
+  - Romane SEGUI 
+  - Komail KASSIMALY
+  - Romain Samson
 # ressources :
     - Cours pdf de l'Efrei 
     - Github Pour héberger le projet
