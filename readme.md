@@ -19,6 +19,8 @@
     - Un éditeur de code (VS Code /Pycharm/Sublime Texte/CodeBlock...)
 
     - Installation de python 3 (IDE)
+    
+    - installer le package de requirements.txt
 
 ## Comment exécuter le projet ?
 
