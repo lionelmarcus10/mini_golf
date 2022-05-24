@@ -1,5 +1,6 @@
 import sys
-
+from Classes.Level import Level
+from Const.ScreenConst import levels
 import pygame
 from Classes.Button import Button
 from Classes.Sound import Sound
@@ -32,8 +33,6 @@ class MainMenu:
         self.Logo1 = pygame.image.load("Assets/LogoLevel1.png")
         self.Logo2 = pygame.image.load("Assets/LogoLevel2.png")
         self.Logo3 = pygame.image.load("Assets/LogoLevel3.png")
-        self.Logo4 = pygame.image.load("Assets/LogoLevel4.png")
-        self.Logo5 = pygame.image.load("Assets/LogoLevel5.png")
 
         # FONT
 
@@ -47,7 +46,7 @@ class MainMenu:
         # button start/exit
         self.exit_image = pygame.image.load('Assets/Bouton_exit.png').convert_alpha()
         self.start_image = pygame.image.load('Assets/Bouton_start.png').convert_alpha()
-        
+     # differents menu   
 
     def menu2(self):
         self.menu_screen.blit(pygame.transform.scale(self.background2, (int(800), int(600))), (0, 0))
@@ -62,7 +61,9 @@ class MainMenu:
             self.menu_run()
 
         if self.solo_button.draw() == True:
-            print("soloooooo")
+            self.current_menu+=1
+            self.menu_run()
+
         elif self.multijoueur_button.draw() == True:
             print("multijoueur")
 
@@ -86,29 +87,27 @@ class MainMenu:
         self.Logo1_button = Button(160, 20, self.Logo1, 0.10)
         self.Logo2_button = Button(20, 130, self.Logo2, 0.10)
         self.Logo3_button = Button(160, 240, self.Logo3, 0.10)
-        self.Logo4_button = Button(-5, 330, self.Logo4, 0.10)
-        self.Logo5_button = Button(135, 440, self.Logo5, 0.10)
 
 
         if self.Logo1_button.draw()==True:
-            print("Niv1")
+            self.current_menu = 4
+            self.menu_run()
 
         if self.Logo2_button.draw()==True:
-            print("Niv2")
+            self.current_menu = 5
+            self.menu_run()
+
 
         if self.Logo3_button.draw()==True:
-            print("Niv3")
+            self.current_menu = 6
+            self.menu_run()
 
-        if self.Logo4_button.draw()==True:
-            print("Niv4")
-
-        if self.Logo5_button.draw()==True:
-            print("Niv5")
 
         if self.exit_button.draw() == True:
             self.current_menu-=1
             self.menu_run()
 
+    # menu regroupant tous les menus
     def menu_run(self):
         if self.current_menu==1:
             self.menu1()
@@ -116,5 +115,14 @@ class MainMenu:
             self.menu2()
         elif self.current_menu == 3:
             self.menu3()
+        elif self.current_menu == 4:
+            self.run()
+    
+    # boucle jouant le level en fonction du menu choisi
 
-
+    def run(self):
+        current_level = self.current_menu - 4
+        while current_level < 3:
+            Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT,levels[current_level]["hole_pos"],levels[current_level]["bsize"])
+            current_level+=1
+    
