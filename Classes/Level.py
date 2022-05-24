@@ -79,7 +79,7 @@ class Level:
         # effets apres collision avec le trou
         if collision_hole:
             trou=pygame.mixer.Sound("Son/Fall.wav")
-            trou.set_volume(0,15)
+            trou.set_volume(0.15)
             trou.play()
             n_steps = 300
 
@@ -107,7 +107,7 @@ class Level:
                 print(f'pos {i} {(x_final[i] - self.ball_size / 2, y_final[i] - self.ball_size / 2)}')
                 pygame.time.wait(10)
 
-            
+                
 
             #------------------------------------------------------
             self.tester_score()
@@ -120,7 +120,7 @@ class Level:
                 self.screen.blit(self.Score.afficher_score(i), self.Score.score_corriger)
             
             self.col = 1
-            
+            pygame.time.wait(1000)
             return False, False
             #------------------------------------------------------
 
@@ -173,6 +173,31 @@ class Level:
         self.entrer_nom(self.screen)
         self.boucle = True
         while self.boucle == True:
+            pos = pygame.mouse.get_pos()
+            for event in pygame.event.get():
+              if event.type == pygame.MOUSEBUTTONUP:
+                x1 = pos[0]
+                y1 = pos[1]
+
+                #conditions
+                xspeed = 0
+                yspeed = 0
+                #gauche 
+                if x1 < self.x:
+                    xspeed = -40
+                # droite
+                else:
+                    #x1 > self.level.x
+                    xspeed = 40
+                # haut
+                if y1 < self.y:
+                    yspeed = -40
+                #bas
+                else:
+                    # y1 > self.level.x
+                    yspeed = 40
+        
+                self.update_pos(xspeed, yspeed)
 
             keys = pygame.key.get_pressed()
             for key in move:
@@ -188,7 +213,7 @@ class Level:
             
             if self.col == 1:
                self.boucle = False
-               break
+               return True
 
             #update screen
             pygame.display.update()

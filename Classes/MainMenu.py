@@ -143,7 +143,7 @@ class MainMenu:
             self.menu2()
         elif self.current_menu == 3:
             self.menu3()
-        elif self.current_menu == 4:
+        else:
             self.run()
     
     # boucle jouant le level en fonction du menu choisi
