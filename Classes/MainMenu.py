@@ -58,14 +58,23 @@ class MainMenu:
         self.exit_button = Button(720, 530, self.exit_image, 1)
 
         if self.exit_button.draw() == True:
+            sortie=pygame.mixer.Sound("Son/sortir.wav")
+            sortie.set_volume(0.15)
+            sortie.play()
             self.current_menu-=1
             self.menu_run()
 
         if self.solo_button.draw() == True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu+=1
             self.menu_run()
 
         elif self.multijoueur_button.draw() == True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             print("multijoueur")
 
     def menu1(self):
@@ -75,10 +84,16 @@ class MainMenu:
         self.start_button = Button(370, 420, self.start_image, 1)
         self.exit_button = Button(700, 530, self.exit_image, 1)
         if self.start_button.draw() == True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu+=1
             self.menu_run()
 
         if self.exit_button.draw() == True:
+            sortie=pygame.mixer.Sound("Son/sortir.wav")
+            sortie.set_volume(0.15)
+            sortie.play()
             pygame.quit()
             sys.exit()
 
@@ -91,20 +106,32 @@ class MainMenu:
 
 
         if self.Logo1_button.draw()==True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu = 4
             self.menu_run()
 
         if self.Logo2_button.draw()==True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu = 5
             self.menu_run()
 
 
         if self.Logo3_button.draw()==True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu = 6
             self.menu_run()
 
 
         if self.exit_button.draw() == True:
+            select=pygame.mixer.Sound("Son/select.wav")
+            select.set_volume(0.15)
+            select.play()
             self.current_menu-=1
             self.menu_run()
 
