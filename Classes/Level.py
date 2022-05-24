@@ -78,9 +78,9 @@ class Level:
         collision_hole = self.hole_mask.overlap(next_ball_mask, (0, 0))
         # effets apres collision avec le trou
         if collision_hole:
-            pygame.mixer.music.pause()
-            pygame.mixer.Sound("Son/Trou.wav").play()
-
+            trou=pygame.mixer.Sound("Son/Fall.wav")
+            trou.set_volume(0,15)
+            trou.play()
             n_steps = 300
 
             height = self.hole_center[1] - self.y
