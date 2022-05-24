@@ -1,6 +1,7 @@
 import  pygame
 from math import *
 from Classes.Score import Score
+from Classes.Box import Box
 import numpy as np
 
 # create levels
@@ -13,7 +14,7 @@ class Level:
 
         self.hole_pos = hole_pos
         self.ball_size = 10
-
+        self.box = Box(100, 100, 140, 32)
         hole_image = pygame.image.load(hole).convert_alpha()
         self.hole_size = hole_image.get_width()
         
@@ -33,7 +34,7 @@ class Level:
         self.border_mask = pygame.mask.from_surface(self.border)
         self.hole_mask = pygame.mask.from_surface(self.hole)
         self.screen = pygame.display.get_surface()
-
+        self.col = 0
         self.score = 0
         self.Score = Score()
 
@@ -70,10 +71,12 @@ class Level:
         next_ball_mask = pygame.mask.from_surface(next_ball)
 
         collision_border = self.border_mask.overlap(next_ball_mask, (0,0))
+        # effets après collision avec le bord
         if collision_border:
             return False
 
         collision_hole = self.hole_mask.overlap(next_ball_mask, (0, 0))
+        # effets apres collision avec le trou
         if collision_hole:
             pygame.mixer.music.pause()
             pygame.mixer.Sound("Son/Trou.wav").play()
@@ -93,6 +96,7 @@ class Level:
             y_final = ((np.sin(angle)*x_2 + np.cos(angle)*y_2) + self.hole_center[1])[::-1]
 
             print('SPIRAL', x_final, y_final)
+            
 
             for i in range(n_steps):
                 next_ball = pygame.Surface((self.w, self.h), flags=pygame.SRCALPHA)
@@ -103,6 +107,7 @@ class Level:
                 print(f'pos {i} {(x_final[i] - self.ball_size / 2, y_final[i] - self.ball_size / 2)}')
                 pygame.time.wait(10)
 
+            
 
             #------------------------------------------------------
             self.tester_score()
@@ -113,23 +118,11 @@ class Level:
 
             for i in range(0, len(self.Score.ancien_score)+1):
                 self.screen.blit(self.Score.afficher_score(i), self.Score.score_corriger)
+            
+            self.col = 1
+            
             return False, False
             #------------------------------------------------------
-
-            return False
-
-
-            # 
-            # hyp = 
-
-            # height = self.hole.y - next_ball.y
-            # hyp = sqrt(height ^ 2 + (self.hole.x - next_ball.x) ^ 2)
-            # angle = asin(height/hyp)
-
-            # for i in range(1, 9):
-            #     image = pygame.transform.rotate(pygame.image.load(f"Assets/image-{i}.png"),angle)
-            #     self.screen.blit(image,(0,0))
-            #     time.sleep(0.05)
 
         self.draw_background()
 
@@ -152,4 +145,50 @@ class Level:
         self.Score.verif_update()
         if self.Score.besoin_nom:
             self.besoin_nom = True
+    
+    def entrer_nom(self, screen):
+        # permet d'entrer le nom du joueur dans le classement
+        while not self.box.nom_saisi:
+            for event in pygame.event.get():
+                self.box.gestion_text(event)
+                pygame.display.flip()
+            self.draw_background()
+            self.box.maj()
+            self.box.ecrire(screen)
+            pygame.display.flip()
+        self.Score.nom = self.box.text
+        self.besoin_nom = False
+        self.update_player()
 
+    def run(self):
+        speed = (10, 10)
+        move = {
+            pygame.K_LEFT: (-1*speed[0], 0),
+            pygame.K_RIGHT: (1*speed[0], 0),
+            pygame.K_UP: (0, -1*speed[1]),
+            pygame.K_DOWN: (0, 1*speed[1])
+        }
+        # Saisie du pseudo de l'utilisateur
+        self.entrer_nom(self.screen)
+        self.boucle = True
+        while self.boucle == True:
+
+            keys = pygame.key.get_pressed()
+            for key in move:
+                if keys[key]:
+                    self.score+= 0.5
+                    self.update_pos(*move[key])
+                
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            
+            if self.col == 1:
+               self.boucle = False
+
+            #update screen
+            pygame.display.update()
+            
+            

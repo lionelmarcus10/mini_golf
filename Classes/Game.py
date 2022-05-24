@@ -22,49 +22,23 @@ class Game:
 
         self.FPS = 60
         self.clock = pygame.time.Clock()
-        self.box = Box(100, 100, 140, 32)
+        
         #menu principal
         self.main_menu = MainMenu()
         #Level 1
-        current_level = 0
+        #current_level = 0
         #self.level= Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT)
         # initiation son arrière-plan
         self.music = Sound()
 
-    def entrer_nom(self, screen):
-        # permet d'entrer le nom du joueur dans le classement
-        while not self.box.nom_saisi:
-            for event in pygame.event.get():
-                self.box.gestion_text(event)
-                pygame.display.flip()
-            self.level.draw_background()
-            self.box.maj()
-            self.box.ecrire(screen)
-            pygame.display.flip()
-        self.level.Score.nom = self.box.text
-        self.level.besoin_nom = False
-        self.level.update_player()
+   
 
     def run(self):
-        speed = (10, 10)
-        move = {
-            pygame.K_LEFT: (-1*speed[0], 0),
-            pygame.K_RIGHT: (1*speed[0], 0),
-            pygame.K_UP: (0, -1*speed[1]),
-            pygame.K_DOWN: (0, 1*speed[1])
-        }
-        # Saisie du pseudo de l'utilisateur
-        #self.entrer_nom(self.screen)
+        # boucle principale du jeu
         while True:
 
-            keys = pygame.key.get_pressed()
-            for key in move:
-                if keys[key]:
-                    self.level.score+= 0.5
-                    self.level.update_pos(*move[key])
-
-            self.main_menu.menu3()
-
+            self.main_menu.menu_run()
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
