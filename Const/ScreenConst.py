@@ -25,13 +25,5 @@ levels = [
                 'hole': "Assets/level3_hole.png",
                 'hole_pos': (452, 170),
                 'bsize': 10,
-            },
-            {
-                'init_pos': (480, 140),
-                'background': "Assets/level4.png",
-                'border': "Assets/level4_border.png",
-                'hole': "Assets/level4_hole.png",
-                'hole_pos': (330, 230),
-                'bsize': 10,
             }
         ]

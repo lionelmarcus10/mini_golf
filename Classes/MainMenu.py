@@ -4,6 +4,7 @@ from Const.ScreenConst import levels
 import pygame
 from Classes.Button import Button
 from Classes.Sound import Sound
+from Classes.Box import Box
 
 class MainMenu:
     def __init__(self):
@@ -121,8 +122,7 @@ class MainMenu:
     # boucle jouant le level en fonction du menu choisi
 
     def run(self):
-        current_level = self.current_menu - 4
-        while current_level < 3:
-            Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT,levels[current_level]["hole_pos"],levels[current_level]["bsize"])
-            current_level+=1
-    
+            current_level = self.current_menu - 4
+            Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT,levels[current_level]["hole_pos"],levels[current_level]["bsize"]).run()
+            self.current_menu+=1
+            Level(levels[current_level]["init_pos"],levels[current_level]["background"],levels[current_level]["border"],levels[current_level]["hole"], self.WIDTH, self.HEIGHT,levels[current_level]["hole_pos"],levels[current_level]["bsize"]).run()

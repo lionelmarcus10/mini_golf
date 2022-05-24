@@ -9,11 +9,11 @@ import numpy as np
 # integrer le paramètre du boutton
 class Level:
 
-    def __init__(self, init_pos, background, border, hole, width, height, hole_pos = [350, 240]):
+    def __init__(self, init_pos, background, border, hole, width, height, hole_pos,bsize):
         self.w, self.h = (width, height)
 
         self.hole_pos = hole_pos
-        self.ball_size = 10
+        self.ball_size = bsize
         self.box = Box(100, 100, 140, 32)
         hole_image = pygame.image.load(hole).convert_alpha()
         self.hole_size = hole_image.get_width()
@@ -131,6 +131,7 @@ class Level:
 
         pygame.display.update()
         return True
+    
 
     def update_score(self, screen):
     # afficher le score
@@ -187,6 +188,7 @@ class Level:
             
             if self.col == 1:
                self.boucle = False
+               break
 
             #update screen
             pygame.display.update()
